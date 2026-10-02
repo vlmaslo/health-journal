@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+alice_carol:
+  provider: alice
+  client: carol
+  plan: premium
+
+alice_dave:
+  provider: alice
+  client: dave
+  plan: basic
+
+bob_carol:
+  provider: bob
+  client: carol
+  plan: basic
+
+bob_erin:
+  provider: bob
+  client: erin
+  plan: premium

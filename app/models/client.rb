@@ -1,4 +1,7 @@
 class Client < ApplicationRecord
+  has_many :subscriptions, dependent: :destroy
+  has_many :providers, through: :subscriptions
+
   normalizes :email, with: ->(email) { email.strip.downcase }
 
   validates :name, presence: true

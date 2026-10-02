@@ -49,4 +49,16 @@ class ClientTest < ActiveSupport::TestCase
     duplicate = Client.new(name: "Impostor", email: clients(:carol).email)
     assert_raises(ActiveRecord::RecordNotUnique) { duplicate.save!(validate: false) }
   end
+
+  test "has providers through subscriptions" do
+    assert_equal [ providers(:alice), providers(:bob) ].sort, clients(:carol).providers.sort
+  end
+
+  test "destroying a client destroys its subscriptions but not its providers" do
+    assert_difference -> { Subscription.count }, -2 do
+      assert_no_difference -> { Provider.count } do
+        clients(:carol).destroy
+      end
+    end
+  end
 end
