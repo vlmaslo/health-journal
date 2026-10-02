@@ -41,10 +41,10 @@ asserts the query count.
 ## Tests
 
 ```bash
-bin/rails test
+bundle exec rspec
 ```
 
-Minitest with fixtures. Each database-level rule (NOT NULL, foreign keys, unique indexes,
+RSpec with FactoryBot. Each database-level rule (NOT NULL, foreign keys, unique indexes,
 plan CHECK constraint) has a test that saves with `validate: false` to prove the database
 enforces it without help from the model.
 
