@@ -1,4 +1,5 @@
 class Client < ApplicationRecord
+  has_many :journal_entries, dependent: :restrict_with_error
   has_many :subscriptions, dependent: :destroy
   has_many :providers, through: :subscriptions
 

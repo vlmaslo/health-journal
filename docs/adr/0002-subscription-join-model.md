@@ -27,6 +27,6 @@ equally valid; what matters is using the name consistently.
 
 ## Consequences
 
-- Queries 1 and 2 are plain associations: `provider.clients`, `client.providers`.
+- Both directions are plain associations: `provider.clients`, `client.providers`.
 - Every future extension (discharge, plan history, billing) lands on this model.
 - **Reconsider if:** never. This is the canonical Rails shape for an attribute on a relationship.

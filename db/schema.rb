@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_02_185410) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_190546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_185410) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_clients_on_email", unique: true
+  end
+
+  create_table "journal_entries", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id", "created_at"], name: "index_journal_entries_on_client_id_and_created_at"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -41,6 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_02_185410) do
     t.check_constraint "plan::text = ANY (ARRAY['basic'::character varying, 'premium'::character varying]::text[])", name: "subscription_plan_check"
   end
 
+  add_foreign_key "journal_entries", "clients"
   add_foreign_key "subscriptions", "clients"
   add_foreign_key "subscriptions", "providers"
 end
