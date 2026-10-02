@@ -1,6 +1,7 @@
 class Provider < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :clients, through: :subscriptions
+  has_many :journal_entries, through: :clients
 
   normalizes :email, with: ->(email) { email.strip.downcase }
 

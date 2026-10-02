@@ -61,4 +61,18 @@ class ProviderTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "journal entries across all clients, newest first" do
+    assert_equal [ journal_entries(:carol_recent), journal_entries(:dave_old) ],
+      providers(:alice).journal_entries.newest_first.to_a
+  end
+
+  test "journal entries exclude clients of other providers" do
+    assert_equal [ journal_entries(:carol_recent) ], providers(:bob).journal_entries.newest_first.to_a
+  end
+
+  test "journal entries are loaded in a single query" do
+    alice = providers(:alice)
+    assert_queries_count(1) { alice.journal_entries.newest_first.to_a }
+  end
 end
